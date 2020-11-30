@@ -1,0 +1,27 @@
+import org.apache.commons.codec.binary.Base64;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class encript {
+	
+	@Test
+	public void login() {
+	System.setProperty("webdriver.chrome.driver", "E:\\Temp\\chromedriver.exe");
+	WebDriver driver = new ChromeDriver();
+	driver.get("https://www.nopcommerce.com/en/login");
+	driver.manage().window().maximize();
+	
+	driver.findElement(By.id("Username")).sendKeys("VJ004");
+	driver.findElement(By.id("Password")).sendKeys(decodedString("UmFodWwwMDRA"));
+	
+	driver.findElement(By.xpath("//input[@value='Log in']")).click();
+	
+	}
+	
+	String decodedString (String encode) {
+		byte[] decodedString = Base64.decodeBase64(encode);
+		return new String(decodedString);
+	}
+}
